@@ -23,9 +23,10 @@ from selenium import webdriver
 # In[6]:
 
 
-# Set the executable path and initialize the chrome browser in splinter
-executable_path = {'executable_path': ChromeDriverManager().install()} 
-browser = Browser('chrome', **executable_path, headless=False)
+def init_browser():
+    # NOTE: Replace with your path to chromedriver
+    executable_path = {"executable_path": "C:\Users\vazql\Desktop\chromedriver"}
+    return Browser("chrome", **executable_path, headless=False)
 
 
 # ## NASA Mars News
@@ -35,21 +36,20 @@ browser = Browser('chrome', **executable_path, headless=False)
 #     * Paragraph Text 
 # * Assign the text to variables that you can reference later.
 
+# Create Mission to Mars global dictionary that can be imported into Mongo
+mars_info = {}
+
+
 # In[7]:
 
 def scrape():
     browser = init_browser()
     
     # Open Browser- Visit Nasa news url through splinter module
-    nasa_url = 'https://mars.nasa.gov/news/'
-    browser.visit(nasa_url)
-
-    
-    # Open Browser- Visit Nasa news url through splinter module
     url1 = 'https://mars.nasa.gov/news/'
     browser.visit(url1)
     
-    
+      
     # In[11]:
     
     
@@ -66,14 +66,14 @@ def scrape():
     # Scrape and collect the latest news title
     news_title = soup.find("div", class_ = "content_title").text
     
-    print(f"Latest News Title: {news_title}")
+    #print(f"Latest News Title: {news_title}")
     
     
     # In[ ]:
     
     
     # Assign the news title to variable news_title
-    news_title = "Mars Now"
+    #news_title = "Mars Now"
     
     
     # In[18]:
@@ -83,14 +83,14 @@ def scrape():
     news_p = soup.find("div", class_ = "article_teaser_body").text
     
     # Display scrapped data paragraph text
-    print(f"Paragraph:\n{news_p}")
+    #print(f"Paragraph:\n{news_p}")
     
     
     # In[19]:
     
     
     # Assign the news paragraph to variable news_p
-    news_p = "The symbols, mottos, and small objects added to the agency's newest Mars rover serve a variety of purposes, from functional to decorative."
+   # news_p = "The symbols, mottos, and small objects added to the agency's newest Mars rover serve a variety of purposes, from functional to decorative."
     
     
     # ## JPL Mars Space Images - Featured Image
