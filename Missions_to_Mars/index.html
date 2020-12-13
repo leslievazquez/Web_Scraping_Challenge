@@ -1,78 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image" href="https://pngimg.com/uploads/mars_planet/mars_planet_PNG13.png">
     <title>Mission to Mars</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
 
 <body class="text-white" style="background-color:black;">
-  <div class="container">
-
+  <div class="container-fluid">
       <!-- Jumbotron -->
       <div class="jumbotron text-center" style="background-image: url(https://cdn.theatlantic.com/static/mt/assets/science/0831Pic.jpg); background-size: 100%; height: 100%;">
-          <h1 class="display-4">Mission to Mars</h1>
-          <a class="btn btn-lg text-white" style="background-color:#c1440e;" href="/scrape" role="button">Scrape New
-              Data</a>
+        <h1 class="display-4">Mission to Mars</h1>
+        <h5> {{ mars.dict.news.title }}</h5>
+        <h5>{{ mars.dict.news_p }}</h5>
+        <p><a class="btn btn-lg text-white" style="background-color:#c1440e;" href="/scrape" role="button">Scrape New Data</a></p>        
       </div>
-
-      <!-- News Section -->
-      <div class="container">
-          <h3>Latest Mars News</h3>
-          <h6 style="color: #c1440e">{{ mars_info.news_title }}</h6>
-          <p>{{ mars_info.news_paragraph}}</p>
+      
+      <div class="row">
+          <div class="col-md-8">
+            <img src="{{ mars_dict.featured_image_url }}" alt="Mars Image" width=100%>
       </div>
-
-      <div class="container">
-          <div class="row">
-              <!-- Left Image-->
-              <div class="col-lg-8 col-md-8 col-sm-12">
-                  <h3>Featured Mars Image</h3>
-                  <img src="{{ mars_info.image_url }}" style="max-width:100%; max-height: auto;" alt="Mars Featured Image">
-              </div>
-              
-              <!-- Table -->
-              <br>
-              <h3>Mars Facts</h3>
-              <div style="max-width: 450px; max-height: 150px; font-size: 15px; margin-bottom: 65px;">
-                {{mars_info.tables|safe}}
-              </div>
-            </div> 
-          </div>
+      
+      <div class="col-md-4">
+          <table border="1" class="table table-striped">
+              {% for key,value in mars_dict.table.items() %}
+              <tr>
+                  <th> {{ key }} </th>
+                  <td> {{ value }} </td>
+              </tr>
+              {% endfor %}
+          </table>
         </div>
+    </div>
 
-
-        <!-- Cards -->
-        <h3 style="padding-top: 50px; margin-top: 100px; text-align: center;">Mars Hemispheres</h3>
-        <div class="card-deck">
-            <hr>
-            <div class="col-md-12">
-                <div class="row">
-                    {% for item in mars_info.hiu %}
-                    <div class="col-md-6">
-                        <div class="card text-white bg-dark" style="margin: 30px;">
-                            <img class="card-img-top" src="{{ item.img_url }}" />
-                            <div class="card-body">
-                                <p class="card-text">{{ item.title }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div><!-- Close main container -->
-
-        <!-- Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+    <div class="row">
+        {% for hemi in mars_dict.hemi_list %}
+        <img src=" {{ hemi.img_url }}" alt="hemi_list" width: 50%>
+        <h3 {{ hemi.title }}></h3>
+        {% endfor %}
+    </div>
+  </div>
 </body>
 
 </html>
