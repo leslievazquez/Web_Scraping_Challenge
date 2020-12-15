@@ -136,7 +136,7 @@ def scrape():
         
     print(hemi_list)
         
-    mars_dict['hemi_list'] = hemi_list
+    mars_dict["hemi_list"] = hemi_list
     
 
     
